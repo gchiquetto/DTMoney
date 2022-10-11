@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useState } from 'react'
+import { createContext } from 'use-context-selector'
 import { api } from '../lib/axios'
 
 interface TransactionsContextProviderProps {
@@ -46,18 +47,21 @@ export function TransactionsContextProvider({
     setTransactions(response.data)
   }
 
-  async function createTransaction(data: CreateTransactionInput) {
-    const { description, value, category, type } = data
-    const response = await api.post('transactions', {
-      description,
-      value,
-      category,
-      type,
-      createdAt: new Date(),
-    })
+  const createTransaction = useCallback(
+    async (data: CreateTransactionInput) => {
+      const { description, value, category, type } = data
+      const response = await api.post('transactions', {
+        description,
+        value,
+        category,
+        type,
+        createdAt: new Date(),
+      })
 
-    setTransactions((state) => [response.data, ...state])
-  }
+      setTransactions((state) => [response.data, ...state])
+    },
+    [],
+  )
 
   useEffect(() => {
     fetchTransactions()

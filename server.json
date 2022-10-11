@@ -55,6 +55,14 @@
       "type": "outcome",
       "createdAt": "2022-10-11T12:28:33.799Z",
       "id": 7
+    },
+    {
+      "description": "Pizza",
+      "value": 7,
+      "category": "Food",
+      "type": "outcome",
+      "createdAt": "2022-10-11T14:56:15.207Z",
+      "id": 8
     }
   ]
 }

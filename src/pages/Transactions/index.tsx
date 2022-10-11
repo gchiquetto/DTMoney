@@ -12,10 +12,10 @@ import {
   TransactionsContent,
   TransactionsTable,
 } from './styles'
-import { useContext } from 'react'
 import { TransactionsContext } from '../../contexts/TransactionsContext'
 import { useForm } from 'react-hook-form'
 import { dateFormatter, valueFormatter } from '../../utils/formatter'
+import { useContextSelector } from 'use-context-selector'
 
 const SearchFormSchema = zod.object({
   query: zod.string(),
@@ -24,7 +24,16 @@ const SearchFormSchema = zod.object({
 type SearchFormData = zod.infer<typeof SearchFormSchema>
 
 export function Transations() {
-  const { transactions, fetchTransactions } = useContext(TransactionsContext)
+  const transactions = useContextSelector(TransactionsContext, (context) => {
+    return context.transactions
+  })
+
+  const fetchTransactions = useContextSelector(
+    TransactionsContext,
+    (context) => {
+      return context.fetchTransactions
+    },
+  )
 
   const searchForm = useForm<SearchFormData>({
     resolver: zodResolver(SearchFormSchema),
