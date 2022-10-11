@@ -1,0 +1,60 @@
+{
+  "transactions": [
+    {
+      "id": 1,
+      "description": "Website development",
+      "value": 2000,
+      "category": "Project",
+      "type": "income",
+      "createdAt": "2022-10-11T09:03:38.577Z"
+    },
+    {
+      "id": 2,
+      "description": "Zelda Breath of the Wild - Nintendo Switch",
+      "value": 60,
+      "category": "Hobby",
+      "type": "outcome",
+      "createdAt": "2022-09-20T08:03:38.577Z"
+    },
+    {
+      "id": 3,
+      "description": "Apartment rent payment",
+      "value": 800,
+      "category": "Home",
+      "type": "outcome",
+      "createdAt": "2022-09-10T11:03:38.577Z"
+    },
+    {
+      "description": "Nintendo Switch OLED",
+      "value": 350,
+      "category": "Hobby",
+      "type": "outcome",
+      "createdAt": "2022-10-11T11:42:38.142Z",
+      "id": 4
+    },
+    {
+      "description": "Salary",
+      "value": 2000,
+      "category": "Salary",
+      "type": "income",
+      "createdAt": "2022-10-11T11:43:43.116Z",
+      "id": 5
+    },
+    {
+      "description": "Salary",
+      "value": 1800,
+      "category": "Salary",
+      "type": "income",
+      "createdAt": "2022-10-11T12:27:52.563Z",
+      "id": 6
+    },
+    {
+      "description": "PS5",
+      "value": 650,
+      "category": "Hobby",
+      "type": "outcome",
+      "createdAt": "2022-10-11T12:28:33.799Z",
+      "id": 7
+    }
+  ]
+}

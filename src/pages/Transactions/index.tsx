@@ -1,5 +1,7 @@
 import { Summary } from '../../components/Summary'
 import { CaretLeft, CaretRight, MagnifyingGlass } from 'phosphor-react'
+import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 import {
   FormContainer,
   PageContainer,
@@ -10,14 +12,49 @@ import {
   TransactionsContent,
   TransactionsTable,
 } from './styles'
+import { useContext } from 'react'
+import { TransactionsContext } from '../../contexts/TransactionsContext'
+import { useForm } from 'react-hook-form'
+import { dateFormatter, valueFormatter } from '../../utils/formatter'
+
+const SearchFormSchema = zod.object({
+  query: zod.string(),
+})
+
+type SearchFormData = zod.infer<typeof SearchFormSchema>
 
 export function Transations() {
+  const { transactions, fetchTransactions } = useContext(TransactionsContext)
+
+  const searchForm = useForm<SearchFormData>({
+    resolver: zodResolver(SearchFormSchema),
+    defaultValues: {
+      query: '',
+    },
+  })
+
+  const {
+    handleSubmit,
+    reset,
+    formState: { isSubmitting },
+    register,
+  } = searchForm
+
+  function handleSearchTransactions({ query }: SearchFormData) {
+    fetchTransactions(query)
+    reset()
+  }
+
   return (
     <TransactionsContainer>
       <Summary />
-      <FormContainer>
-        <input type="text" placeholder="Search for a transaction" />
-        <button type="submit">
+      <FormContainer onSubmit={handleSubmit(handleSearchTransactions)}>
+        <input
+          type="text"
+          placeholder="Search for a transaction"
+          {...register('query')}
+        />
+        <button type="submit" disabled={isSubmitting}>
           <MagnifyingGlass size={20} />
           Search
         </button>
@@ -25,34 +62,24 @@ export function Transations() {
       <TransactionsContent>
         <TransactionsTable>
           <tbody>
-            <tr>
-              <td width="50%">Website development</td>
-              <td>
-                <PaymentHightlight variant="income">
-                  $ 2,000.00
-                </PaymentHightlight>
-              </td>
-              <td>Project</td>
-              <td>07/09/2022</td>
-            </tr>
-            <tr>
-              <td width="50%">Zelda Breath of the Wild - Nintendo Switch</td>
-              <td>
-                <PaymentHightlight variant="outcome">
-                  - $ 60.00
-                </PaymentHightlight>
-              </td>
-              <td>Hobby</td>
-              <td>20/08/2022</td>
-            </tr>
-            <tr>
-              <td width="50%">Apartment rent payment</td>
-              <td>
-                <PaymentHightlight variant="income">$ 800.00</PaymentHightlight>
-              </td>
-              <td>Home</td>
-              <td>10/08/2022</td>
-            </tr>
+            {transactions.map((transaction) => {
+              return (
+                <tr key={transaction.id}>
+                  <td width="50%">{transaction.description}</td>
+                  <td>
+                    <PaymentHightlight variant={transaction.type}>
+                      {transaction.type === 'income'
+                        ? ` ${valueFormatter.format(transaction.value)}`
+                        : `- ${valueFormatter.format(transaction.value)}`}
+                    </PaymentHightlight>
+                  </td>
+                  <td>{transaction.category}</td>
+                  <td>
+                    {dateFormatter.format(new Date(transaction.createdAt))}
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </TransactionsTable>
       </TransactionsContent>

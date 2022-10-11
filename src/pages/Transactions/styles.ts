@@ -19,6 +19,7 @@ export const FormContainer = styled.form`
     background-color: ${(props) => props.theme['gray-900']};
     border-radius: 6px;
     border: 0;
+    color: ${(props) => props.theme['gray-300']};
 
     &::placeholder {
       color: ${(props) => props.theme['gray-500']};
