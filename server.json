@@ -63,6 +63,62 @@
       "type": "outcome",
       "createdAt": "2022-10-11T14:56:15.207Z",
       "id": 8
+    },
+    {
+      "description": "Pizza",
+      "value": 5,
+      "category": "Food",
+      "type": "outcome",
+      "createdAt": "2022-10-12T08:16:09.471Z",
+      "id": 9
+    },
+    {
+      "description": "Ticket to Ride - Europe",
+      "value": 40,
+      "category": "Hobby",
+      "type": "outcome",
+      "createdAt": "2022-10-12T08:31:27.274Z",
+      "id": 10
+    },
+    {
+      "description": "Nintendo Switch OLED",
+      "value": 1,
+      "category": "Food",
+      "type": "outcome",
+      "createdAt": "2022-10-12T08:40:00.867Z",
+      "id": 11
+    },
+    {
+      "description": "Ticket to Ride - Europe",
+      "value": 2,
+      "category": "Hobby",
+      "type": "outcome",
+      "createdAt": "2022-10-12T08:42:10.309Z",
+      "id": 12
+    },
+    {
+      "description": "Salary",
+      "value": 1500,
+      "category": "Salary",
+      "type": "income",
+      "createdAt": "2022-10-12T09:20:15.488Z",
+      "id": 13
+    },
+    {
+      "description": "Nintendo Switch OLED",
+      "value": 20,
+      "category": "Hobby",
+      "type": "outcome",
+      "createdAt": "2022-10-12T09:30:02.344Z",
+      "id": 14
+    },
+    {
+      "description": "PS5",
+      "value": 600,
+      "category": "Hobby",
+      "type": "outcome",
+      "createdAt": "2022-10-12T09:31:17.905Z",
+      "id": 15
     }
   ]
 }

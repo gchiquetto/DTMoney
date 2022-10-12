@@ -7,8 +7,20 @@ import {
 import igniteLogo from '../../assets/ignite-logo.svg'
 import * as Dialog from '@radix-ui/react-dialog'
 import { NewTransactionModal } from '../NewTransactionModal'
+import { useContextSelector } from 'use-context-selector'
+import { TransactionsContext } from '../../contexts/TransactionsContext'
 
 export function Header() {
+  const openModal = useContextSelector(TransactionsContext, (context) => {
+    return context.openModal
+  })
+  const setModalOpenStatus = useContextSelector(
+    TransactionsContext,
+    (context) => {
+      return context.setModalOpenStatus
+    },
+  )
+
   return (
     <HeaderContainer>
       <HeaderContent>
@@ -16,7 +28,7 @@ export function Header() {
           <img src={igniteLogo} alt="" />
           <h1>DT Money</h1>
         </HeaderLogo>
-        <Dialog.Root>
+        <Dialog.Root open={openModal} onOpenChange={setModalOpenStatus}>
           <Dialog.Trigger asChild>
             <ButtonOpenModal>New Transaction</ButtonOpenModal>
           </Dialog.Trigger>
