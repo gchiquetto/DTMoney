@@ -125,13 +125,15 @@ export const PaginationButton = styled.button`
   border: 0;
   color: ${(props) => props.theme['green-500']};
   background-color: transparent;
+  cursor: pointer;
 
   &:disabled {
     color: ${(props) => props.theme['gray-600']};
+    cursor: not-allowed;
   }
 `
 interface PaginationProps {
-  variant?: 'currentPage'
+  variant?: 'currentPage' | 'notCurrentPage'
 }
 
 export const PageContainer = styled.span<PaginationProps>`

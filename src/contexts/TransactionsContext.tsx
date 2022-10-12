@@ -25,7 +25,9 @@ interface CreateTransactionInput {
 interface TransactionsContextType {
   transactions: Transaction[]
   openModal: boolean
+  pagesQuantity: number
   fetchTransactions: (query: string) => Promise<void>
+  fetchTransactionsPerPage: (page: number) => Promise<void>
   createTransaction: (data: CreateTransactionInput) => Promise<void>
   setModalOpenStatus: () => void
 }
@@ -37,6 +39,7 @@ export function TransactionsContextProvider({
 }: TransactionsContextProviderProps) {
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [openModal, setOpenModal] = useState(false)
+  const [pagesQuantity, setPagesQuantity] = useState(1)
 
   async function fetchTransactions(query?: string) {
     const response = await api.get('/transactions', {
@@ -44,9 +47,22 @@ export function TransactionsContextProvider({
         q: query,
         _sort: 'createdAt',
         _order: 'desc',
+        _limit: 5,
       },
     })
+    setPagesQuantity(Math.ceil(Number(response.headers['x-total-count']) / 5))
+    setTransactions(response.data)
+  }
 
+  async function fetchTransactionsPerPage(page?: number) {
+    const response = await api.get('/transactions', {
+      params: {
+        _sort: 'createdAt',
+        _order: 'desc',
+        _page: page,
+        _limit: 5,
+      },
+    })
     setTransactions(response.data)
   }
 
@@ -66,6 +82,7 @@ export function TransactionsContextProvider({
       })
 
       setTransactions((state) => [response.data, ...state])
+      fetchTransactions()
       setOpenModal(false)
     },
     [],
@@ -80,7 +97,9 @@ export function TransactionsContextProvider({
       value={{
         transactions,
         openModal,
+        pagesQuantity,
         fetchTransactions,
+        fetchTransactionsPerPage,
         createTransaction,
         setModalOpenStatus,
       }}

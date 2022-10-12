@@ -119,6 +119,22 @@
       "type": "outcome",
       "createdAt": "2022-10-12T09:31:17.905Z",
       "id": 15
+    },
+    {
+      "description": "Hamburger",
+      "value": 5,
+      "category": "Food",
+      "type": "outcome",
+      "createdAt": "2022-10-12T11:10:44.726Z",
+      "id": 16
+    },
+    {
+      "description": "Salary2",
+      "value": 1000,
+      "category": "Salary",
+      "type": "income",
+      "createdAt": "2022-10-12T11:21:15.837Z",
+      "id": 17
     }
   ]
 }
